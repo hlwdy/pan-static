@@ -5,3 +5,5 @@ $(document).on('click','#op-list a',function(){
 	}
 	return false;
 });
+$(document).on('pjax:start',function(){NProgress.start();});
+$(document).on('pjax:end',function(){NProgress.done();});
