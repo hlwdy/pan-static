@@ -13,7 +13,15 @@ function refreshPath(){
 function refreshData(){
 	document.querySelectorAll("#op-list").forEach(t=>{t.querySelectorAll("tr>td:nth-child(2)").forEach(t=>t.textContent=formatDate(t.textContent)),t.querySelectorAll("tr>td:nth-child(3)").forEach(t=>t.textContent=formatSize(t.textContent))});
 }
-$(document).on('click','#op-list a',function(){
+function showMask(){
+	$(".mask").css("height",$(document).height());
+	$(".mask").css("width",$(document).width());
+	$(".mask").show();
+}
+function hideMask(){
+	$(".mask").hide();
+}
+$(document).on('click','#op-list a,#navbar-href a',function(){
 	var url=$(this).attr("href");
 	if(!url.endsWith('?preview')){
 		setTimeout(function(){$.pjax({url:url,container:"#op-list",fragment:"#op-list",timeout:8000});},10);
@@ -21,5 +29,5 @@ $(document).on('click','#op-list a',function(){
 	}
 	return true;
 });
-$(document).on('pjax:start',function(){NProgress.start();});
-$(document).on('pjax:end',function(){NProgress.done();refreshPath();refreshData();});
+$(document).on('pjax:start',function(){showMask();NProgress.start();});
+$(document).on('pjax:end',function(){NProgress.done();refreshPath();refreshData();hideMask();});
