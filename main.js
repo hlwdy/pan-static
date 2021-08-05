@@ -10,6 +10,9 @@ function refreshPath(){
 	$('#navbar-href ol').html(htmltext);
 	return htmltext;
 }
+function refreshData(){
+	document.querySelectorAll("#op-list").forEach(t=>{t.querySelectorAll("tr>td:nth-child(2)").forEach(t=>t.textContent=formatDate(t.textContent)),t.querySelectorAll("tr>td:nth-child(3)").forEach(t=>t.textContent=formatSize(t.textContent))});
+}
 $(document).on('click','#op-list a',function(){
 	var url=$(this).attr("href");
 	console.log(url);
@@ -20,4 +23,4 @@ $(document).on('click','#op-list a',function(){
 	return true;
 });
 $(document).on('pjax:start',function(){NProgress.start();});
-$(document).on('pjax:end',function(){NProgress.done();refreshPath();});
+$(document).on('pjax:end',function(){NProgress.done();refreshPath();refreshData();});
