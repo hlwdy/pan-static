@@ -1,3 +1,15 @@
+function refreshPath(){
+	var tmp=window.location.href.split('/');
+	tmp=tmp.splice(3,tmp.length-4);
+	var htmltext='';
+	if(tmp.length==1)htmltext='<li class="breadcrumb-item"><a href="./'+'../'.repeat(tmp.length)+'">Home</a></li>';
+	else htmltext='<li class="breadcrumb-item"><a href="#">Home</a></li>';
+	for(i in tmp){
+		htmltext+='<li class="breadcrumb-item"><a href="'+(i==tmp.length-1?'#':'./'+'../'.repeat(tmp.length-1-i))+'">'+tmp[i]+'</a></li>';
+	}
+	$('#navbar-href ol').html(htmltext);
+	return htmltext;
+}
 $(document).on('click','#op-list a',function(){
 	var url=$(this).attr("href");
 	console.log(url);
@@ -8,4 +20,4 @@ $(document).on('click','#op-list a',function(){
 	return true;
 });
 $(document).on('pjax:start',function(){NProgress.start();});
-$(document).on('pjax:end',function(){NProgress.done();});
+$(document).on('pjax:end',function(){NProgress.done();refreshPath();});
