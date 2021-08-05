@@ -22,6 +22,7 @@ function hideMask(){
 	$(".mask").hide();
 }
 $(document).on('click','#op-list a,#navbar-href a',function(){
+	if(!$('#op-list').length)return true;
 	var url=$(this).attr("href");
 	if(!url.endsWith('?preview')){
 		setTimeout(function(){$.pjax({url:url,container:"#op-list",fragment:"#op-list",timeout:8000});},10);
