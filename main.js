@@ -2,8 +2,8 @@ function refreshPath(){
 	var tmp=window.location.href.split('/');
 	tmp=tmp.splice(3,tmp.length-4);
 	var htmltext='';
-	if(tmp.length==1)htmltext='<li class="breadcrumb-item"><a href="./'+'../'.repeat(tmp.length)+'">Home</a></li>';
-	else htmltext='<li class="breadcrumb-item"><a href="#">Home</a></li>';
+	if(tmp.length==0)htmltext='<li class="breadcrumb-item"><a href="#">Home</a></li>';
+	else htmltext='<li class="breadcrumb-item"><a href="./'+'../'.repeat(tmp.length)+'">Home</a></li>';
 	for(i in tmp){
 		htmltext+='<li class="breadcrumb-item"><a href="'+(i==tmp.length-1?'#':'./'+'../'.repeat(tmp.length-1-i))+'">'+tmp[i]+'</a></li>';
 	}
@@ -15,9 +15,8 @@ function refreshData(){
 }
 $(document).on('click','#op-list a',function(){
 	var url=$(this).attr("href");
-	console.log(url);
 	if(!url.endsWith('?preview')){
-		setTimeout(function(){$.pjax({url:url,container:"#op-list",fragment:"#op-list",timeout:8000});},100);
+		setTimeout(function(){$.pjax({url:url,container:"#op-list",fragment:"#op-list",timeout:8000});},10);
 		return false;
 	}
 	return true;
