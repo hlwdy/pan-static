@@ -33,6 +33,6 @@ $(document).on('click','#op-list a,#navbar-href a[href!="#"]',function(){
 $(document).on('pjax:start',function(){showMask();NProgress.start();});
 $(document).on('pjax:end',function(){NProgress.done();refreshPath();refreshData();hideMask();});
 
-$(document).on('click','#op-list tr:not(:first-child)',function(){
+$(document).on('click','#op-list tbody tr',function(){
 	this.querySelector('td a').click();
 });
