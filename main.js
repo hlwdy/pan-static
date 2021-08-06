@@ -21,7 +21,7 @@ function showMask(){
 function hideMask(){
 	$(".mask").hide();
 }
-$(document).on('click','#op-list a,#navbar-href a',function(){
+$(document).on('click','#op-list a,#navbar-href a[href!="#"]',function(){
 	if(!$('#op-list').length)return true;
 	var url=$(this).attr("href");
 	if(!url.endsWith('?preview')){
@@ -32,3 +32,7 @@ $(document).on('click','#op-list a,#navbar-href a',function(){
 });
 $(document).on('pjax:start',function(){showMask();NProgress.start();});
 $(document).on('pjax:end',function(){NProgress.done();refreshPath();refreshData();hideMask();});
+
+$(document).on('click','#op-list tr:not(:first-child)',function(){
+	this.querySelector('td a').click();
+});
