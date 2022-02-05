@@ -1,5 +1,5 @@
 function refreshPath(){
-	var tmp=window.location.href.split('/');
+	var tmp=decodeURIComponent(window.location.href).split('/');
 	tmp=tmp.splice(3,tmp.length-4);
 	var htmltext='';
 	if(tmp.length==0)htmltext='<li class="breadcrumb-item"><a href="#">Home</a></li>';
